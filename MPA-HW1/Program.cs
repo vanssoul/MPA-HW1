@@ -7,8 +7,21 @@ using System.Threading.Tasks;
 
 namespace MPA_HW1
 {
+    //class Comparable : IComparable
+    //{
+    //    public int CompareTo(Human<T> other)
+    //    {
+    //        return birthYear.CompareTo(other.birthYear);
+    //    }
+
+    //    public int CompareTo(object obj)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //}
     class Program
     {
+
         static private List<Human> ScanHumanList(string fileName)
         {
             List<Human> humans = new List<Human>();
@@ -69,6 +82,23 @@ namespace MPA_HW1
             return birthYear.CompareTo(other.birthYear);
         }
 
+        public static bool operator >(Human operand1, Human operand2)
+        {
+            return operand1.CompareTo(operand2) == 1;
+        }
+        public static bool operator <(Human operand1, Human operand2)
+        {
+            return operand1.CompareTo(operand2) == -1;
+        }
+        public static bool operator >=(Human operand1, Human operand2)
+        {
+            return operand1.CompareTo(operand2) >= 0;
+        }
+        public static bool operator <=(Human operand1, Human operand2)
+        {
+            return operand1.CompareTo(operand2) <= 0;
+        }
+
         public string Name
         {
             get { return name; }
@@ -116,12 +146,12 @@ namespace MPA_HW1
             int left = 2 * index + 1;
             int right = 2 * index + 2;
             int largest = index;
-            if (left <= heapSize && arr[left].CompareTo(arr[index]) > 0)
+            if (left <= heapSize && arr[left] > arr[index])
             {
                 largest = left;
             }
 
-            if (right <= heapSize && arr[right].CompareTo(arr[largest]) > 0)
+            if (right <= heapSize && arr[right] > arr[largest])
             {
                 largest = right;
             }
