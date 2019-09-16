@@ -31,7 +31,6 @@ namespace MPA_HW1
         static void Main(string[] args)
         {
             List<Human> humans = ScanHumanList("Humans.txt");
-            //List<Human> humans = ScanHumanList("C:/Users/igor3/source/repos/NewRepo/MPA-HW1/MPA-HW1/Humans.txt");
 
             HeapSort hs = new HeapSort();
             hs.Sort(humans);
