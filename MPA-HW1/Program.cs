@@ -7,20 +7,22 @@ using System.Threading.Tasks;
 
 namespace MPA_HW1
 {
-    //class Comparable : IComparable
-    //{
-    //    public int CompareTo(Human<T> other)
-    //    {
-    //        return birthYear.CompareTo(other.birthYear);
-    //    }
+    delegate int Compare(Human human1, Human human2);
 
-    //    public int CompareTo(object obj)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-    //}
     class Program
     {
+        private static int CompareByName(Human human1, Human human2)
+        {
+            return human1.Name.CompareTo(human2.Name);
+        }
+        private static int CompareBySecondName(Human human1, Human human2)
+        {
+            return human1.SecondName.CompareTo(human2.SecondName);
+        }
+        private static int CompareByYearBirth(Human human1, Human human2)
+        {
+            return human1.BirthYear.CompareTo(human2.BirthYear);
+        }
 
         static private List<Human> ScanHumanList(string fileName)
         {
@@ -46,9 +48,18 @@ namespace MPA_HW1
             List<Human> humans = ScanHumanList("Humans.txt");
 
             HeapSort hs = new HeapSort();
-            hs.Sort(humans);
 
+            hs.Sort(humans, CompareByName);
             DisplayArray(humans);
+            Console.WriteLine();
+
+            hs.Sort(humans, CompareBySecondName);
+            DisplayArray(humans);
+            Console.WriteLine();
+
+            hs.Sort(humans, CompareByYearBirth);
+            DisplayArray(humans);
+            Console.WriteLine();
 
             Console.ReadLine();
         }
@@ -64,7 +75,7 @@ namespace MPA_HW1
             return amount.CompareTo(other.amount);
         }
     }
-    class Human : IComparable<Human>
+    class Human : IComparer<Human>
     {
         private string name;
         private string secondName;
@@ -77,26 +88,9 @@ namespace MPA_HW1
             this.birthYear = birthYear;
         }
 
-        public int CompareTo(Human other)
+        public int Compare(Human x, Human y)
         {
-            return birthYear.CompareTo(other.birthYear);
-        }
-
-        public static bool operator >(Human operand1, Human operand2)
-        {
-            return operand1.CompareTo(operand2) == 1;
-        }
-        public static bool operator <(Human operand1, Human operand2)
-        {
-            return operand1.CompareTo(operand2) == -1;
-        }
-        public static bool operator >=(Human operand1, Human operand2)
-        {
-            return operand1.CompareTo(operand2) >= 0;
-        }
-        public static bool operator <=(Human operand1, Human operand2)
-        {
-            return operand1.CompareTo(operand2) <= 0;
+            return (x.BirthYear).CompareTo(y.birthYear);
         }
 
         public string Name
@@ -115,9 +109,11 @@ namespace MPA_HW1
     class HeapSort
     {
         private int heapSize;
+        private Compare compareDelegate;
 
-        public void Sort(List<Human> arr)
+        public void Sort(List<Human> arr, Compare compareDelegate)
         {
+            this.compareDelegate = compareDelegate;
             BuildHeap(arr);
             for (int i = arr.Capacity - 1; i >= 0; i--)
             {
@@ -146,12 +142,12 @@ namespace MPA_HW1
             int left = 2 * index + 1;
             int right = 2 * index + 2;
             int largest = index;
-            if (left <= heapSize && arr[left] > arr[index])
+            if (left <= heapSize && compareDelegate.Invoke(arr[left], arr[index]) > 0)
             {
                 largest = left;
             }
 
-            if (right <= heapSize && arr[right] > arr[largest])
+            if (right <= heapSize && compareDelegate.Invoke(arr[right], arr[largest]) > 0)
             {
                 largest = right;
             }
