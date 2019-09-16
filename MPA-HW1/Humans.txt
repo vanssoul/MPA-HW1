@@ -1,0 +1,9 @@
+﻿8
+Ivanov Ivan 2000
+Kuleshov Ivan 2010
+Kuleshov Petr 1999
+Baranov Igor 1990
+Koght Yan 1998
+Popov Alesha 2003
+Avarin Amin 2000
+Klemenko Vlad 2001
