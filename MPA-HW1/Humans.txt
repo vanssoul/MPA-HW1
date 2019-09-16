@@ -1,5 +1,4 @@
-﻿8
-Ivanov Ivan 2000
+﻿Ivanov Ivan 2000
 Kuleshov Ivan 2010
 Kuleshov Petr 1999
 Baranov Igor 1990

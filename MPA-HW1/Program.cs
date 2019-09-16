@@ -9,28 +9,33 @@ namespace MPA_HW1
 {
     class Program
     {
-        static private Human[] ScanHumanList(string filePath)
+        static private List<Human> ScanHumanList(string filePath)
         {
-            int countHuman = Convert.ToInt32(File.ReadLines(filePath));
-            Human[] humans = new Human[countHuman];
+            List<Human> humans = new List<Human>();
 
             foreach (string line in File.ReadLines(filePath))
             {
-                for (int i = 0; i < countHuman; i++)
-                {
-                    string[] lines = File.ReadLines(filePath).ToString().Split(' ');
-                    humans[i] = new Human(lines[1], lines[0], Convert.ToInt32(lines[2]));
-                }
+                string[] lines = line.Split(' ');
+                humans.Add(new Human(lines[1], lines[0], Convert.ToInt32(lines[2])));
             }
+
             return humans;
+        }
+        static private void DisplayArray(List<Human> arr)
+        {
+            for (int i = 0; i < arr.Capacity; i++)
+            {
+                Console.WriteLine(arr[i].SecondName + " " + arr[i].Name + " " + arr[i].BirthYear);
+            }
         }
         static void Main(string[] args)
         {
-            ScanHumanList("C:/Users/igor3/source/repos/NewRepo/MPA-HW1/MPA-HW1/Humans.txt");
-            int[] arr = { 10, 64, 7, 99, 32, 18 };
+            List<Human> humans = ScanHumanList("C:/Users/igor3/source/repos/NewRepo/MPA-HW1/MPA-HW1/Humans.txt");
 
             HeapSort hs = new HeapSort();
-            hs.PerformHeapSort(arr);
+            hs.Sort(humans);
+
+            DisplayArray(humans);
 
             Console.ReadLine();
         }
@@ -46,7 +51,7 @@ namespace MPA_HW1
             return amount.CompareTo(other.amount);
         }
     }
-    class Human
+    class Human : IComparable<Human>
     {
         private string name;
         private string secondName;
@@ -58,48 +63,65 @@ namespace MPA_HW1
             this.secondName = secondName;
             this.birthYear = birthYear;
         }
+
+        public int CompareTo(Human other)
+        {
+            return birthYear.CompareTo(other.birthYear);
+        }
+
+        public string Name
+        {
+            get { return name; }
+        }
+        public string SecondName
+        {
+            get { return secondName; }
+        }
+        public int BirthYear
+        {
+            get { return birthYear; }
+        }
     }
     class HeapSort
     {
         private int heapSize;
 
-        public void PerformHeapSort(int[] arr)
+        public void Sort(List<Human> arr)
         {
             BuildHeap(arr);
-            for (int i = arr.Length - 1; i >= 0; i--)
+            for (int i = arr.Capacity - 1; i >= 0; i--)
             {
                 Swap(arr, 0, i);
                 heapSize--;
                 Heapify(arr, 0);
             }
-            DisplayArray(arr);
         }
 
-        private void BuildHeap(int[] arr)
+        private void BuildHeap(List<Human> arr)
         {
-            heapSize = arr.Length - 1;
+            heapSize = arr.Capacity - 1;
             for (int i = heapSize / 2; i >= 0; i--)
             {
                 Heapify(arr, i);
             }
         }
-        private void Swap(int[] arr, int x, int y)
+        private void Swap(List<Human> arr, int x, int y)
         {
-            int temp = arr[x];
+            Human temp = arr[x];
             arr[x] = arr[y];
             arr[y] = temp;
         }
-        private void Heapify(int[] arr, int index)
+        private void Heapify(List<Human> arr, int index)
         {
             int left = 2 * index + 1;
             int right = 2 * index + 2;
             int largest = index;
-            if (left <= heapSize && arr[left] > arr[index])
+            if (left <= heapSize && arr[left].CompareTo(arr[index]) > 0)
             {
                 largest = left;
             }
 
-            if (right <= heapSize && arr[right] > arr[largest])
+            if (right <= heapSize && arr[right].CompareTo(arr[largest]) > 0)
             {
                 largest = right;
             }
@@ -108,13 +130,6 @@ namespace MPA_HW1
             {
                 Swap(arr, index, largest);
                 Heapify(arr, largest);
-            }
-        }
-        private void DisplayArray(int[] arr)
-        {
-            for (int i = 0; i < arr.Length; i++)
-            {
-                Console.Write("[{0}]", arr[i]);
             }
         }
     }
