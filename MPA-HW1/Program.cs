@@ -9,11 +9,11 @@ namespace MPA_HW1
 {
     class Program
     {
-        static private List<Human> ScanHumanList(string filePath)
+        static private List<Human> ScanHumanList(string fileName)
         {
             List<Human> humans = new List<Human>();
 
-            foreach (string line in File.ReadLines(filePath))
+            foreach (string line in File.ReadLines(fileName))
             {
                 string[] lines = line.Split(' ');
                 humans.Add(new Human(lines[1], lines[0], Convert.ToInt32(lines[2])));
@@ -30,7 +30,8 @@ namespace MPA_HW1
         }
         static void Main(string[] args)
         {
-            List<Human> humans = ScanHumanList("C:/Users/igor3/source/repos/NewRepo/MPA-HW1/MPA-HW1/Humans.txt");
+            List<Human> humans = ScanHumanList("Humans.txt");
+            //List<Human> humans = ScanHumanList("C:/Users/igor3/source/repos/NewRepo/MPA-HW1/MPA-HW1/Humans.txt");
 
             HeapSort hs = new HeapSort();
             hs.Sort(humans);
