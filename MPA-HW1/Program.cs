@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace MPA_HW1
 {
-    delegate int Compare(Human human1, Human human2);
+    public delegate int Compare(Human human1, Human human2);
 
-    class Program
+    public class Program
     {
-        private static int CompareByName(Human human1, Human human2)
+        public static int CompareByName(Human human1, Human human2)
         {
             return human1.Name.CompareTo(human2.Name);
         }
-        private static int CompareBySecondName(Human human1, Human human2)
+        public static int CompareBySecondName(Human human1, Human human2)
         {
             return human1.SecondName.CompareTo(human2.SecondName);
         }
-        private static int CompareByYearBirth(Human human1, Human human2)
+        public static int CompareByYearBirth(Human human1, Human human2)
         {
             return human1.BirthYear.CompareTo(human2.BirthYear);
         }
@@ -38,7 +38,7 @@ namespace MPA_HW1
         }
         static private void DisplayArray(List<Human> arr)
         {
-            for (int i = 0; i < arr.Capacity; i++)
+            for (int i = 0; i < arr.Count; i++)
             {
                 Console.WriteLine(arr[i].SecondName + " " + arr[i].Name + " " + arr[i].BirthYear);
             }

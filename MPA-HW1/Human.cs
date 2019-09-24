@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MPA_HW1
 {
-    class Human : IComparer<Human>
+    public class Human : IComparer<Human>
     {
         private string name;
         private string secondName;
@@ -19,6 +19,34 @@ namespace MPA_HW1
             this.birthYear = birthYear;
         }
 
+        public override bool Equals(object obj)
+        {
+            if (obj is Human)
+            {
+                Human equatableObject = obj as Human;
+                return this.Name == equatableObject.Name &&
+                    this.SecondName == equatableObject.SecondName &&
+                    this.BirthYear == equatableObject.BirthYear;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public override int GetHashCode()
+        {
+            int hashCode = 1;
+            foreach (char letter in this.Name)
+            {
+                hashCode += letter;
+            }
+            foreach (char letter in this.SecondName)
+            {
+                hashCode += letter;
+            }
+            hashCode *= this.BirthYear;
+            return hashCode;
+        }
         public int Compare(Human x, Human y)
         {
             return (x.BirthYear).CompareTo(y.birthYear);

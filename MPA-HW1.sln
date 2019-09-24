@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.438
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPA-HW1", "MPA-HW1\MPA-HW1.csproj", "{E278D2C2-6445-407F-9A4B-7CE863E8E014}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPA-HW1Tests", "UnitTestProject3\MPA-HW1Tests.csproj", "{BC9F7F2E-8F5F-429A-BAE0-5E13EBDD4432}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,26 @@ Global
 		{E278D2C2-6445-407F-9A4B-7CE863E8E014}.Release|x64.Build.0 = Release|Any CPU
 		{E278D2C2-6445-407F-9A4B-7CE863E8E014}.Release|x86.ActiveCfg = Release|Any CPU
 		{E278D2C2-6445-407F-9A4B-7CE863E8E014}.Release|x86.Build.0 = Release|Any CPU
+		{BC9F7F2E-8F5F-429A-BAE0-5E13EBDD4432}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC9F7F2E-8F5F-429A-BAE0-5E13EBDD4432}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC9F7F2E-8F5F-429A-BAE0-5E13EBDD4432}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{BC9F7F2E-8F5F-429A-BAE0-5E13EBDD4432}.Debug|ARM.Build.0 = Debug|Any CPU
+		{BC9F7F2E-8F5F-429A-BAE0-5E13EBDD4432}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{BC9F7F2E-8F5F-429A-BAE0-5E13EBDD4432}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{BC9F7F2E-8F5F-429A-BAE0-5E13EBDD4432}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BC9F7F2E-8F5F-429A-BAE0-5E13EBDD4432}.Debug|x64.Build.0 = Debug|Any CPU
+		{BC9F7F2E-8F5F-429A-BAE0-5E13EBDD4432}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BC9F7F2E-8F5F-429A-BAE0-5E13EBDD4432}.Debug|x86.Build.0 = Debug|Any CPU
+		{BC9F7F2E-8F5F-429A-BAE0-5E13EBDD4432}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC9F7F2E-8F5F-429A-BAE0-5E13EBDD4432}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC9F7F2E-8F5F-429A-BAE0-5E13EBDD4432}.Release|ARM.ActiveCfg = Release|Any CPU
+		{BC9F7F2E-8F5F-429A-BAE0-5E13EBDD4432}.Release|ARM.Build.0 = Release|Any CPU
+		{BC9F7F2E-8F5F-429A-BAE0-5E13EBDD4432}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{BC9F7F2E-8F5F-429A-BAE0-5E13EBDD4432}.Release|ARM64.Build.0 = Release|Any CPU
+		{BC9F7F2E-8F5F-429A-BAE0-5E13EBDD4432}.Release|x64.ActiveCfg = Release|Any CPU
+		{BC9F7F2E-8F5F-429A-BAE0-5E13EBDD4432}.Release|x64.Build.0 = Release|Any CPU
+		{BC9F7F2E-8F5F-429A-BAE0-5E13EBDD4432}.Release|x86.ActiveCfg = Release|Any CPU
+		{BC9F7F2E-8F5F-429A-BAE0-5E13EBDD4432}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

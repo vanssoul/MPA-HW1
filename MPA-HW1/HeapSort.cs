@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MPA_HW1
 {
-    class HeapSort
+    public class HeapSort
     {
         private int heapSize;
         private Compare compareDelegate;
@@ -15,7 +15,7 @@ namespace MPA_HW1
         {
             this.compareDelegate = compareDelegate;
             BuildHeap(arr);
-            for (int i = arr.Capacity - 1; i >= 0; i--)
+            for (int i = arr.Count - 1; i >= 0; i--)
             {
                 Swap(arr, 0, i);
                 heapSize--;
@@ -25,7 +25,7 @@ namespace MPA_HW1
 
         private void BuildHeap(List<Human> arr)
         {
-            heapSize = arr.Capacity - 1;
+            heapSize = arr.Count - 1;
             for (int i = heapSize / 2; i >= 0; i--)
             {
                 Heapify(arr, i);
