@@ -1,9 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MPA_HW1
 {
@@ -36,12 +33,13 @@ namespace MPA_HW1
 
             return humans;
         }
-        static private void DisplayArray(List<Human> arr)
+        static private void WriteArray(StreamWriter streamWriter, List<Human> arr)
         {
             for (int i = 0; i < arr.Count; i++)
             {
-                Console.WriteLine(arr[i].SecondName + " " + arr[i].Name + " " + arr[i].BirthYear);
+                streamWriter.WriteLine(arr[i].SecondName + " " + arr[i].Name + " " + arr[i].BirthYear);
             }
+            streamWriter.WriteLine();
         }
         static void Main(string[] args)
         {
@@ -49,19 +47,23 @@ namespace MPA_HW1
 
             HeapSort hs = new HeapSort();
 
+            FileStream fileStream = new FileStream("SortedHumans.txt", FileMode.Create);
+            StreamWriter streamWriter = new StreamWriter(fileStream);
+            fileStream.Seek(0, SeekOrigin.End);
+
             hs.Sort(humans, CompareByName);
-            DisplayArray(humans);
-            Console.WriteLine();
+            streamWriter.WriteLine("Sorted by name:");
+            WriteArray(streamWriter, humans);
 
             hs.Sort(humans, CompareBySecondName);
-            DisplayArray(humans);
-            Console.WriteLine();
+            streamWriter.WriteLine("Sorted by secondname:");
+            WriteArray(streamWriter, humans);
 
             hs.Sort(humans, CompareByYearBirth);
-            DisplayArray(humans);
-            Console.WriteLine();
+            streamWriter.WriteLine("Sorted by year birth:");
+            WriteArray(streamWriter, humans);
 
-            Console.ReadLine();
+            streamWriter.Close();
         }
     }    
 }
