@@ -146,10 +146,19 @@ namespace MPA_HW1
 
             stopwatch.Start();
 
-            hs.Sort(humans, CompareByYearBirth);
+            hs.Sort(humans, CompareByName);
 
             stopwatch.Stop();
-            Console.WriteLine(stopwatch.Elapsed.Milliseconds);
+            Console.WriteLine(stopwatch.Elapsed);
+            stopwatch.Reset();
+
+            humans = GenerateHumansList(10000);
+            stopwatch.Start();
+
+            humans.Sort(CompareByName);
+
+            stopwatch.Stop();
+            Console.WriteLine(stopwatch.Elapsed);
             stopwatch.Reset();
         }
     }    
