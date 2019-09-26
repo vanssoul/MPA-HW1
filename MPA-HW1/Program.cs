@@ -1,6 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Collections.Generic;
+using System.Net;
+using System.Text;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace MPA_HW1
 {
@@ -41,6 +46,75 @@ namespace MPA_HW1
             }
             streamWriter.WriteLine();
         }
+        public static string getBetween(string strSource, string strStart, string strEnd)
+        {
+            int Start, End;
+            if (strSource.Contains(strStart) && strSource.Contains(strEnd))
+            {
+                Start = strSource.IndexOf(strStart, 0) + strStart.Length;
+                End = strSource.IndexOf(strEnd, Start);
+                return strSource.Substring(Start, End - Start);
+            }
+            else
+            {
+                return "";
+            }
+        }
+        static private List<Human> GenerateHumansListFromGitHub(int count)
+        {
+            string myBotNewVersionURL = "https://github.com/georgy-schukin/mpiaa/blob/master/common/names.txt";
+
+            WebClient myBotNewVersionClient = new WebClient();
+            Stream stream = myBotNewVersionClient.OpenRead(myBotNewVersionURL);
+            StreamReader reader = new StreamReader(stream);
+            String contentName = reader.ReadToEnd();
+
+
+
+            myBotNewVersionURL = "https://github.com/georgy-schukin/mpiaa/blob/master/common/surnames.txt";
+
+            myBotNewVersionClient = new WebClient();
+            stream = myBotNewVersionClient.OpenRead(myBotNewVersionURL);
+            reader = new StreamReader(stream);
+            String contentSecondName = reader.ReadToEnd();
+
+
+
+            Random random = new Random();
+
+            List<Human> randomHumans = new List<Human>(count);
+            int randomNumber;
+            string randomName, randomSecondName;
+            for (int i = 0; i < count; i++)
+            {
+                randomNumber = random.Next(5490);
+                randomName = getBetween(contentName, randomNumber.ToString() + "\" class=\"blob-code blob-code-inner js-file-line\">", "<");
+                randomSecondName = getBetween(contentSecondName, randomNumber.ToString() + "\" class=\"blob-code blob-code-inner js-file-line\">", "<");
+                randomHumans.Add(new Human(randomName, randomSecondName, random.Next(1930, 2019)));
+            }
+
+            return randomHumans;
+        }
+        static private List<Human> GenerateHumansList(int count)
+        {
+            string[] names = File.ReadAllLines("names.txt");
+            string[] secondNames = File.ReadAllLines("secondnames.txt");
+
+            Random random = new Random();
+
+            List<Human> randomHumans = new List<Human>(count);
+            int randomNumber;
+            string randomName, randomSecondName;
+            for (int i = 0; i < count; i++)
+            {
+                randomNumber = random.Next(5490);
+                randomName = names[random.Next(names.Length)];
+                randomSecondName = secondNames[random.Next(secondNames.Length)];
+                randomHumans.Add(new Human(randomName, randomSecondName, random.Next(1930, 2019)));
+            }
+
+            return randomHumans;
+        }
         static void Main(string[] args)
         {
             List<Human> humans = ScanHumanList("Humans.txt");
@@ -64,6 +138,19 @@ namespace MPA_HW1
             WriteArray(streamWriter, humans);
 
             streamWriter.Close();
+
+            //Time measurement
+            Stopwatch stopwatch = new Stopwatch();
+
+            humans = GenerateHumansList(10000);
+
+            stopwatch.Start();
+
+            hs.Sort(humans, CompareByYearBirth);
+
+            stopwatch.Stop();
+            Console.WriteLine(stopwatch.Elapsed.Milliseconds);
+            stopwatch.Reset();
         }
     }    
 }
